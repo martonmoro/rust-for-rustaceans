@@ -1,0 +1,28 @@
+[package]
+name = "rust-for-rustaceans-fuzz"
+version = "0.0.0"
+publish = false
+edition = "2024"
+
+[package.metadata]
+cargo-fuzz = true
+
+[dependencies]
+libfuzzer-sys = "0.4"
+
+[dependencies.rust-for-rustaceans]
+path = ".."
+
+[[bin]]
+name = "fuzz_target_1"
+path = "fuzz_targets/fuzz_target_1.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "ch6_fuzzing"
+path = "fuzz_targets/ch6_fuzzing.rs"
+test = false
+doc = false
+bench = false
