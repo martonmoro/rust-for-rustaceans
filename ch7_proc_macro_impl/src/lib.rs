@@ -2,7 +2,7 @@ use proc_macro::TokenStream;
 use proc_macro2::{Ident, Span};
 use quote::quote;
 use syn::{
-    ItemFn, LitStr,
+    DeriveInput, ItemFn, LitStr,
     parse::{Parse, ParseStream},
     parse_macro_input,
 };
@@ -84,6 +84,23 @@ pub fn timed(attr: TokenStream, item: TokenStream) -> TokenStream {
             let timed_value = #conversion;
             println!("{} took {}{}", stringify!(#fn_name), timed_value, #unit);
             result
+        }
+    };
+
+    output.into()
+}
+
+#[proc_macro_derive(Describe)]
+pub fn derive_describe(input: TokenStream) -> TokenStream {
+    let input = parse_macro_input!(input as DeriveInput);
+
+    let name = input.ident;
+
+    let output = quote! {
+        impl #name {
+            pub fn describe(&self) -> String {
+                format!("This is a {}", stringify!(#name))
+            }
         }
     };
 
