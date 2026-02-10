@@ -5,3 +5,4 @@ edition = "2024"
 
 [dependencies]
 ch7_proc_macro_impl = { path = "ch7_proc_macro_impl" }
+rayon = "1.11.0"
